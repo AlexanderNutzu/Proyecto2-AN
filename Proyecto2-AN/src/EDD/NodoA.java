@@ -4,6 +4,8 @@
  */
 package EDD;
 
+import ClasesPrincipales.Persona;
+
 /**
  *
  * @author alexa
