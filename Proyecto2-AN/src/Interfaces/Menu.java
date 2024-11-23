@@ -86,6 +86,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(buscarPorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         buscarPorTitulo.setText("Buscar Por Titulo");
+        buscarPorTitulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarPorTituloActionPerformed(evt);
+            }
+        });
         jPanel1.add(buscarPorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, -1, -1));
 
         verGen.setText("Ver Generaciones");
@@ -142,6 +147,11 @@ public class Menu extends javax.swing.JFrame {
         BuscarNombre v1 = new BuscarNombre();
         this.dispose();
     }//GEN-LAST:event_buscarPorNombreActionPerformed
+
+    private void buscarPorTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPorTituloActionPerformed
+        BuscarTitulo v2 = new BuscarTitulo();
+        this.dispose();
+    }//GEN-LAST:event_buscarPorTituloActionPerformed
 
     /**
      * @param args the command line arguments

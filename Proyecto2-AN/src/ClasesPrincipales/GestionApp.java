@@ -73,4 +73,30 @@ public class GestionApp {
         }
         return null;
     }
+    
+    
+    public Persona[] buscarTitulo(String titulo){
+        Lista resultados = this.tablaPersonas.buscarTitulo(titulo);
+        
+        if(!resultados.isEmpty()){
+            Persona[] resultadoBusq = new Persona[resultados.getSize()];
+            for (int i = 0; i < resultados.getSize(); i++) {
+                resultadoBusq[i] = (Persona) resultados.getValor(i);
+            }
+            
+            return resultadoBusq;
+        }
+        
+        return null;
+    }
+    
+    public String mostrarBusqTitulo(Persona[] resultados){
+        String resultadosStr = "";
+        for (int i = 0; i < resultados.length; i++) {
+            int index = i;
+            resultadosStr += "Indice: " + index + "\nNombre Unico: " + resultados[i].getNombreUnico() + "\nTitulo: " + resultados[i].getTitulo()+"\n\n";
+        }
+        
+        return resultadosStr;
+    }
 }
