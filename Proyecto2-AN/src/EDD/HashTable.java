@@ -5,6 +5,7 @@
 package EDD;
 
 import ClasesPrincipales.Persona;
+import Funciones.ResultadoBusq;
 
 /**
  *
@@ -66,7 +67,7 @@ public class HashTable {
         return null;
     }
 
-    public Lista buscarNombre(String nombre) {
+     public Lista buscarNombreUnico(String nombre) {
         Lista resultado = new Lista();
         for (int i = 0; i < max; i++) {
             if (!tabla[i].isEmpty()) {
@@ -74,13 +75,16 @@ public class HashTable {
                     Persona personaActual = (Persona) tabla[i].getValor(j);
                     if (personaActual.getMote() != null) {
                         if (personaActual.getMote().toLowerCase().contains(nombre.toLowerCase())) {
-                            resultado.insertarFinal(personaActual);
+                            ResultadoBusq resultadoPersona = new ResultadoBusq(personaActual, i);
+                            resultado.insertarFinal(resultadoPersona);
                         } else if (personaActual.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
-                            resultado.insertarFinal(personaActual);
+                            ResultadoBusq resultadoPersona = new ResultadoBusq(personaActual, i);
+                            resultado.insertarFinal(resultadoPersona);
                         }
                     } else {
+                        ResultadoBusq resultadoPersona = new ResultadoBusq(personaActual, i);
                         if (personaActual.getNombre().toLowerCase().contains(nombre.toLowerCase())) {
-                            resultado.insertarFinal(personaActual);
+                            resultado.insertarFinal(resultadoPersona);
                         }
                     }
                 }
@@ -90,21 +94,6 @@ public class HashTable {
         return resultado;
     }
     
-    public Lista buscarNombre2(String nombre) {
-        Lista resultado = new Lista();
-        for (int i = 0; i < max; i++) {
-            if (!tabla[i].isEmpty()) {
-                for (int j = 0; j < tabla[i].getSize(); j++) {
-                    Persona personaActual = (Persona) tabla[i].getValor(j);
-                    if(personaActual.getNombre().toLowerCase().contains(nombre.toLowerCase())){
-                        resultado.insertarFinal(personaActual);
-                    }
-                }
-            }
-        }
-
-        return resultado;
-    }
 
     public Lista buscarTitulo(String titulo) {
         Lista resultado = new Lista();

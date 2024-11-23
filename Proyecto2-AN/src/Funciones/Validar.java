@@ -4,6 +4,8 @@
  */
 package Funciones;
 
+import EDD.Lista;
+
 /**
  *
  * @author alexa
@@ -21,4 +23,21 @@ public class Validar {
             return -1;
         }
       }
+    
+    public boolean indexResultadoValido(Lista resultados, int index){
+        if(!resultados.isEmpty()){
+            for (int i = 0; i < resultados.getSize(); i++) {
+                ResultadoBusq resultadoActual = (ResultadoBusq) resultados.getValor(i);
+                if(resultadoActual.getIndexHash() == index){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean validarIndice(int max, int indice){
+        return max > indice && indice>=0;
+    }
+    
     }
