@@ -50,9 +50,17 @@ public class Arbol {
                 NodoA nodoActual = (NodoA) cola.desEnColar();
                 Persona personaActual = (Persona) nodoActual.getDato();
 
-                if (personaActual.getNombreUnico().equalsIgnoreCase(nombreUnico) || personaActual.getNumeral().equalsIgnoreCase(nombreUnico)) {
+                if(personaActual.getMote() != null){
+                    if(personaActual.getMote().equalsIgnoreCase(nombreUnico))  {
+                        return nodoActual;
+                    }
+                }
+                
+                if (personaActual.getNombreNumeral().equalsIgnoreCase(nombreUnico)){
                     return nodoActual;
                 }
+                
+                
 
                 Nodo temp = nodoActual.getHijos().getpFirst();
                 while (temp != null) {
