@@ -4,6 +4,14 @@
  */
 package Interfaces;
 
+import CargarArchivos.Cargar;
+import CargarArchivos.FileChooser;
+import static Interfaces.Iniciar.gestionApp;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alexa
@@ -15,6 +23,10 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        nombreLinaje.setText(gestionApp.getNombreFamilia());
     }
 
     /**
@@ -26,21 +38,110 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        nombreLinaje = new javax.swing.JLabel();
+        cargarNuevo = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        buscarPorNombre = new javax.swing.JButton();
+        buscarPorTitulo = new javax.swing.JButton();
+        verGen = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 30)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Menu Principal");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 470, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        jLabel2.setText("Linaje Cargado:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+
+        nombreLinaje.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
+        nombreLinaje.setText("N");
+        jPanel1.add(nombreLinaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
+
+        cargarNuevo.setText("Cargar Nuevo Linaje");
+        cargarNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarNuevoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cargarNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+
+        jButton2.setText("Ver Arbol");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
+
+        buscarPorNombre.setText("Buscar Por Nombre");
+        buscarPorNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarPorNombreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buscarPorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+
+        buscarPorTitulo.setText("Buscar Por Titulo");
+        jPanel1.add(buscarPorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, -1, -1));
+
+        verGen.setText("Ver Generaciones");
+        jPanel1.add(verGen, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+
+        jButton6.setText("Ver Antepasados");
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cargarNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarNuevoActionPerformed
+        Cargar cargarArchivo = new Cargar();
+        FileChooser abrir = new FileChooser(this);
+
+        String ruta = abrir.abrirArchivo();
+
+        try {
+            cargarArchivo.cargarArchivo(ruta);
+            if (cargarArchivo.getEstructuraArbol() != null) {
+                
+                
+                gestionApp.setArbolGenealogico(cargarArchivo.getEstructuraArbol());
+                gestionApp.setTablaPersonas(cargarArchivo.getTablaHash());
+                gestionApp.setNombreFamilia(cargarArchivo.getNombreFamilia());
+                
+                nombreLinaje.setText(gestionApp.getNombreFamilia());
+
+                JOptionPane.showMessageDialog(null, "Se cargo un nuevo linaje");
+            } else {
+                JOptionPane.showMessageDialog(null, "Hay errores en el JSON");
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Iniciar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cargarNuevoActionPerformed
+
+    private void buscarPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPorNombreActionPerformed
+        BuscarNombre v1 = new BuscarNombre();
+        this.dispose();
+    }//GEN-LAST:event_buscarPorNombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +179,15 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buscarPorNombre;
+    private javax.swing.JButton buscarPorTitulo;
+    private javax.swing.JButton cargarNuevo;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel nombreLinaje;
+    private javax.swing.JButton verGen;
     // End of variables declaration//GEN-END:variables
 }

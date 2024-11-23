@@ -6,6 +6,8 @@ package ClasesPrincipales;
 
 import EDD.Arbol;
 import EDD.HashTable;
+import EDD.Lista;
+import Funciones.ResultadoBusq;
 
 /**
  *
@@ -44,5 +46,31 @@ public class GestionApp {
 
     public void setNombreFamilia(String nombreFamilia) {
         this.nombreFamilia = nombreFamilia;
+    }
+    
+    public String mostrarBusquedaNombreUnico(Lista resultados){
+        
+        String resultadoStr = "";
+        if(!resultados.isEmpty()){
+            for (int i = 0; i < resultados.getSize(); i++) {
+                resultadoStr += resultados.getValor(i).toString() + "\n";
+            }
+            
+            return resultadoStr;
+        }else{
+            return "No hay resultados";
+        }
+    }
+    
+    public Persona buscarIndex(Lista resultados, int index){
+        if(!resultados.isEmpty()){
+            for (int i = 0; i < resultados.getSize(); i++) {
+                ResultadoBusq resultadoActual = (ResultadoBusq) resultados.getValor(i);
+                if(resultadoActual.getIndexHash() == index){
+                    return resultadoActual.getPersona();
+                }
+            }
+        }
+        return null;
     }
 }
