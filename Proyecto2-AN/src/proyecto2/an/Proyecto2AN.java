@@ -4,6 +4,8 @@
  */
 package proyecto2.an;
 
+import Interfaces.Iniciar;
+
 /**
  *
  * @author alexa
@@ -14,7 +16,7 @@ public class Proyecto2AN {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Iniciar inicio = new Iniciar();
     }
     
 }
