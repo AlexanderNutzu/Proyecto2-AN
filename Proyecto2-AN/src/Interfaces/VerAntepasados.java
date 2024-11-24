@@ -53,7 +53,7 @@ public class VerAntepasados extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Busqueda Por Nombre");
+        jLabel1.setText("Ver Antepasados");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 540, -1));
 
         jLabel2.setText("Ingrese el nombre de la persona:");

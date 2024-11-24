@@ -79,7 +79,7 @@ public class Iniciar extends javax.swing.JFrame {
         
         try {
             cargarArchivo.cargarArchivo(ruta);
-            if(cargarArchivo.getEstructuraArbol()!=null){
+            if(!cargarArchivo.isDuplicadosDetectados() && !cargarArchivo.isPadresInexistentes()){
                 JOptionPane.showMessageDialog(null, "Carga exitosa");
                 //cargarArchivo.getEstructuraArbol().mostrarPorNiveles();
                 

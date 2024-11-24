@@ -116,12 +116,14 @@ public class Cargar {
                         estructuraArbol.insertar(estructuraArbol.buscarNombreUnico(nombrePadre), persona);
                     } else {
                         this.setPadresInexistentes(true);
+                        
                     }
                 } else {
                     if (estructuraArbol.buscarNombreUnico(persona.getPadre()) != null) {
                         estructuraArbol.insertar(estructuraArbol.buscarNombreUnico(persona.getPadre()), persona);
                     } else {
                         this.setPadresInexistentes(true);
+                        
                     }
                 }
             }
