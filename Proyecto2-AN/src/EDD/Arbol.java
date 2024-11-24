@@ -2,182 +2,225 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package EDD;
+package EDD;  
 
-import ClasesPrincipales.Persona;
+import ClasesPrincipales.Persona;  
 
-/**
- *
- * @author alexa
- */
-public class Arbol {
-    private NodoA root;
+/**  
+ * Clase que representa un árbol genealógico que permite la organización  
+ * y búsqueda de personas (nodos) en base a sus relaciones familiares.  
+ *   
+ * @autor alexa  
+ */  
+public class Arbol {  
+    private NodoA root; // Raíz del árbol  
 
-    public Arbol() {
-        this.root = null;
-    }
+    /**  
+     * Constructor de la clase Arbol.  
+     * Inicializa el árbol con una raíz nula.  
+     */  
+    public Arbol() {  
+        this.root = null;  
+    }  
 
-    public NodoA getRoot() {
-        return root;
-    }
+    // Métodos de acceso (getters y setters)  
 
-    public void setRoot(NodoA root) {
-        this.root = root;
-    }
+    public NodoA getRoot() {  
+        return root;  
+    }  
 
-    public boolean isEmpty() {
-        return root == null;
-    }
+    public void setRoot(NodoA root) {  
+        this.root = root;  
+    }  
 
-    public void iniciarlizarRaiz(Object dato) {
-        NodoA rootNueva = new NodoA(dato);
-        this.setRoot(rootNueva);
-    }
+    /**  
+     * Verifica si el árbol está vacío.  
+     *   
+     * @return true si el árbol no tiene nodos, false en caso contrario.  
+     */  
+    public boolean isEmpty() {  
+        return root == null;  
+    }  
 
-    public void insertar(NodoA padre, Object dato) {
-        NodoA hijo = new NodoA(dato);
-        hijo.setPadre(padre);
-        padre.aggHijo(hijo);
-    }
+    /**  
+     * Inicializa la raíz del árbol con un nuevo nodo dado.  
+     *   
+     * @param dato el dato a almacenar en el nodo raíz.  
+     */  
+    public void iniciarlizarRaiz(Object dato) {  
+        NodoA rootNueva = new NodoA(dato);  
+        this.setRoot(rootNueva);  
+    }  
 
-    public NodoA buscarNombreUnico(String nombreUnico) {
-        if (!this.isEmpty()) {
-            Cola cola = new Cola();
+    /**  
+     * Inserta un nuevo nodo como hijo de un nodo padre existente.  
+     *   
+     * @param padre el nodo padre al que se le añadirá el hijo.  
+     * @param dato el dato a almacenar en el nuevo nodo hijo.  
+     */  
+    public void insertar(NodoA padre, Object dato) {  
+        NodoA hijo = new NodoA(dato);  
+        hijo.setPadre(padre);  
+        padre.aggHijo(hijo);  
+    }  
 
-            cola.enColar(this.root);
+    /**  
+     * Busca un nodo en el árbol por el nombre único (mote o nombre con numeral) de una persona.  
+     *  
+     * @param nombreUnico el mote o nombre con numeral de la persona a buscar.  
+     * @return el nodo que contiene la persona, o null si no se encuentra.  
+     */  
+    public NodoA buscarNombreUnico(String nombreUnico) {  
+        if (!this.isEmpty()) {  
+            Cola cola = new Cola();  
+            cola.enColar(this.root);  
 
-            while (!cola.colaVacia()) {
-                NodoA nodoActual = (NodoA) cola.desEnColar();
-                Persona personaActual = (Persona) nodoActual.getDato();
+            while (!cola.colaVacia()) {  
+                NodoA nodoActual = (NodoA) cola.desEnColar();  
+                Persona personaActual = (Persona) nodoActual.getDato();  
 
-                if(personaActual.getMote() != null){
-                    if(personaActual.getMote().equalsIgnoreCase(nombreUnico))  {
-                        return nodoActual;
-                    }
-                }
-                
-                if (personaActual.getNombreNumeral().equalsIgnoreCase(nombreUnico)){
-                    return nodoActual;
-                }
-                
-                
+                // Verifica si el mote coincide  
+                if (personaActual.getMote() != null && personaActual.getMote().equalsIgnoreCase(nombreUnico)) {  
+                    return nodoActual;  
+                }  
 
-                Nodo temp = nodoActual.getHijos().getpFirst();
-                while (temp != null) {
-                    NodoA nodoHijoActual = (NodoA) temp.getDato();
-                    cola.enColar(nodoHijoActual);
+                // Verifica si el nombre y numeral coinciden  
+                if (personaActual.getNombreNumeral().equalsIgnoreCase(nombreUnico)) {  
+                    return nodoActual;  
+                }  
 
-                    temp = temp.getPnext();
-                }
-            }
+                // Agrega hijos a la cola para la búsqueda en niveles  
+                Nodo temp = nodoActual.getHijos().getpFirst();  
+                while (temp != null) {  
+                    NodoA nodoHijoActual = (NodoA) temp.getDato();  
+                    cola.enColar(nodoHijoActual);  
+                    temp = temp.getPnext();  
+                }  
+            }  
+        }  
+        return null;  
+    }  
 
-        }
-        return null;
-    }
+    /**  
+     * Muestra el árbol por niveles en la consola.  
+     */  
+    public void mostrarPorNiveles() {  
+        if (!this.isEmpty()) {  
+            String arbolStr = "Arbol General Por Niveles:\n";  
+            Cola cola = new Cola();  
+            cola.enColar(this.root);  
 
-    public void mostrarPorNiveles() {
-        if (!this.isEmpty()) {
-            String arbolStr = "Arbol General Por Niveles:\n";
-            Cola cola = new Cola();
+            while (!cola.colaVacia()) {  
+                NodoA nodoActual = (NodoA) cola.desEnColar();  
+                Persona personaActual = (Persona) nodoActual.getDato();  
 
-            cola.enColar(this.root);
+                arbolStr += personaActual.toString() + "\n";  
 
-            while (!cola.colaVacia()) {
-                NodoA nodoActual = (NodoA) cola.desEnColar();
-                Persona personaActual = (Persona) nodoActual.getDato();
+                Nodo temp = nodoActual.getHijos().getpFirst();  
+                while (temp != null) {  
+                    NodoA nodoHijoActual = (NodoA) temp.getDato();  
+                    cola.enColar(nodoHijoActual);  
+                    temp = temp.getPnext();  
+                }  
+            }  
 
-                arbolStr += personaActual.toString() + "\n";
+            System.out.println(arbolStr);  
+        }  
+    }  
 
-                Nodo temp = nodoActual.getHijos().getpFirst();
-                while (temp != null) {
-                    NodoA nodoHijoActual = (NodoA) temp.getDato();
-                    cola.enColar(nodoHijoActual);
+    /**  
+     * Calcula el máximo nivel profundidad del árbol.  
+     *   
+     * @return el nivel máximo del árbol.  
+     */  
+    public int maximoNivel() {  
+        if (this.isEmpty()) {  
+            return 0;  
+        }  
+        int max = 0;  
+        Cola cola = new Cola();  
+        cola.enColar(this.root);  
 
-                    temp = temp.getPnext();
-                }
-            }
+        Cola colaNiveles = new Cola();  
+        colaNiveles.enColar(1);  
 
-            System.out.println(arbolStr);
-        }
-    }
+        while (!cola.colaVacia()) {  
+            NodoA nodoActual = (NodoA) cola.desEnColar();  
+            int nivelActual = (int) colaNiveles.desEnColar();  
 
-    public int maximoNivel() {
-        if (this.isEmpty()) {
-            return 0;
-        }
-        int max = 0;
-        Cola cola = new Cola();
-        cola.enColar(this.root);
+            max = Math.max(max, nivelActual);  
 
-        Cola colaNiveles = new Cola();
-        colaNiveles.enColar(1);
+            Nodo temp = nodoActual.getHijos().getpFirst();  
+            while (temp != null) {  
+                NodoA nodoHijoActual = (NodoA) temp.getDato();  
+                cola.enColar(nodoHijoActual);  
+                colaNiveles.enColar(nivelActual + 1);  
+                temp = temp.getPnext();  
+            }  
+        }  
 
-        while (!cola.colaVacia()) {
-            NodoA nodoActual = (NodoA) cola.desEnColar();
-            int nivelActual = (int) colaNiveles.desEnColar();
+        return max;  
+    }  
 
-            max = Math.max(max, nivelActual);
+    /**  
+     * Devuelve una lista de personas que se encuentran en un nivel específico.  
+     *   
+     * @param nivel el nivel cuyas personas se desean obtener.  
+     * @return una lista de personas en el nivel especificado o null si el árbol está vacío.  
+     */  
+    public Lista listaNivel(int nivel) {  
+        Lista personasNivel = new Lista();  
+        if (this.isEmpty()) {  
+            return null;  
+        }  
 
-            Nodo temp = nodoActual.getHijos().getpFirst();
-            while (temp != null) {
-                NodoA nodoHijoActual = (NodoA) temp.getDato();
-                cola.enColar(nodoHijoActual);
-                colaNiveles.enColar(nivelActual + 1);
-                temp = temp.getPnext();
-            }
-        }
+        Cola cola = new Cola();  
+        cola.enColar(this.root);  
 
-        return max;
-    }
+        Cola colaNiveles = new Cola();  
+        colaNiveles.enColar(1);  
 
-    public Lista listaNivel(int nivel) {
-        Lista personasNivel = new Lista();
-        if (this.isEmpty()) {
-            return null;
-        }
-        
-        Cola cola = new Cola();
-        cola.enColar(this.root);
+        while (!cola.colaVacia()) {  
+            NodoA nodoActual = (NodoA) cola.desEnColar();  
+            int nivelActual = (int) colaNiveles.desEnColar();  
 
-        Cola colaNiveles = new Cola();
-        colaNiveles.enColar(1);
+            if (nivelActual == nivel) {  
+                Persona personaActual = (Persona) nodoActual.getDato();  
+                personasNivel.insertarFinal(personaActual);  
+            }  
 
-        while (!cola.colaVacia()) {
-            NodoA nodoActual = (NodoA) cola.desEnColar();
-            int nivelActual = (int) colaNiveles.desEnColar();
+            Nodo temp = nodoActual.getHijos().getpFirst();  
+            while (temp != null) {  
+                NodoA nodoHijoActual = (NodoA) temp.getDato();  
+                cola.enColar(nodoHijoActual);  
+                colaNiveles.enColar(nivelActual + 1);  
+                temp = temp.getPnext();  
+            }  
+        }  
 
-            if(nivelActual == nivel){
-                Persona personaActual = (Persona) nodoActual.getDato();
-                personasNivel.insertarFinal(personaActual);
-            }
+        return personasNivel;  
+    }  
 
-            Nodo temp = nodoActual.getHijos().getpFirst();
-            while (temp != null) {
-                NodoA nodoHijoActual = (NodoA) temp.getDato();
-                cola.enColar(nodoHijoActual);
-                colaNiveles.enColar(nivelActual + 1);
-                temp = temp.getPnext();
-            }
-        }
+    /**  
+     * Busca y devuelve una lista de antepasados de un nodo dado.  
+     *   
+     * @param nodo el nodo a partir del cual se buscarán los antepasados.  
+     * @return una lista de personas que son ancestros del nodo dado, o null si el nodo es nulo.  
+     */  
+    public Lista buscarAntepasados(NodoA nodo) {  
+        if (nodo == null) {  
+            return null;  
+        }  
 
-        return personasNivel;
+        Lista ancestros = new Lista();  
+        NodoA actual = nodo.getPadre();  
 
-    }
-    
-    public Lista buscarAntepasados(NodoA nodo){
-        if(nodo == null){
-            return null;
-        }
-        
-        Lista ancestros = new Lista();
-        NodoA actual = nodo.getPadre();
-        
-        while(actual != null){
-            Persona personaActual = (Persona) actual.getDato();
-            ancestros.insertarFinal(personaActual);
-            actual = actual.getPadre();
-        }
-        
-        return ancestros;
-    }
-}
+        while (actual != null) {  
+            Persona personaActual = (Persona) actual.getDato();  
+            ancestros.insertarFinal(personaActual);  
+            actual = actual.getPadre();  
+        }  
+
+        return ancestros;  
+    }  
+}  
