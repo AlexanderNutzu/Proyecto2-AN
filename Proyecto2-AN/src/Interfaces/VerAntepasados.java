@@ -4,8 +4,8 @@
  */
 package Interfaces;
 
-import EDD.Arbol;
 import EDD.Lista;
+import EDD.NodoA;
 import Funciones.Validar;
 import static Interfaces.Iniciar.gestionApp;
 import javax.swing.JOptionPane;
@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author alexa
  */
-public class BuscarNombre extends javax.swing.JFrame {
+public class VerAntepasados extends javax.swing.JFrame {
 
     private Validar validar = new Validar();
     private Lista resultados = new Lista();
-    
-    public BuscarNombre() {
+
+    public VerAntepasados() {
         initComponents();
         this.setVisible(true);
         this.setResizable(false);
@@ -44,27 +44,21 @@ public class BuscarNombre extends javax.swing.JFrame {
         resultadoBusqueda = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         inputIndex = new javax.swing.JTextField();
-        verDescendencia = new javax.swing.JButton();
+        verAntepasados = new javax.swing.JButton();
         volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 30)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Busqueda Por Nombre");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 530, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 540, -1));
 
         jLabel2.setText("Ingrese el nombre de la persona:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
-
-        inputNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputNombreActionPerformed(evt);
-            }
-        });
-        jPanel1.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 280, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel1.add(inputNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 270, -1));
 
         buscar.setText("Buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -72,31 +66,25 @@ public class BuscarNombre extends javax.swing.JFrame {
                 buscarActionPerformed(evt);
             }
         });
-        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
+        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, -1, -1));
 
         resultadoBusqueda.setColumns(20);
         resultadoBusqueda.setRows(5);
         jScrollPane1.setViewportView(resultadoBusqueda);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 280, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 270, 170));
 
-        jLabel3.setText("Numero asociado a a persona para ver su descendencia:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
+        jLabel3.setText("Numero asociado a la persona para ver sus antepasados:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+        jPanel1.add(inputIndex, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 270, -1));
 
-        inputIndex.addActionListener(new java.awt.event.ActionListener() {
+        verAntepasados.setText("Ver Antepasados");
+        verAntepasados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputIndexActionPerformed(evt);
+                verAntepasadosActionPerformed(evt);
             }
         });
-        jPanel1.add(inputIndex, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 280, -1));
-
-        verDescendencia.setText("Ver descendencia");
-        verDescendencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verDescendenciaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(verDescendencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, -1, -1));
+        jPanel1.add(verAntepasados, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, -1, -1));
 
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
@@ -104,29 +92,28 @@ public class BuscarNombre extends javax.swing.JFrame {
                 volverActionPerformed(evt);
             }
         });
-        jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, -1, -1));
+        jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void inputNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputNombreActionPerformed
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        Menu menu = new Menu();
+        this.dispose();
+    }//GEN-LAST:event_volverActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         String nombreBusq = inputNombre.getText();
@@ -134,24 +121,19 @@ public class BuscarNombre extends javax.swing.JFrame {
         resultadoBusqueda.setText(gestionApp.mostrarBusquedaNombreUnico(resultados));
     }//GEN-LAST:event_buscarActionPerformed
 
-    private void inputIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIndexActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputIndexActionPerformed
-
-    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-        Menu menu = new Menu();
-        this.dispose();
-    }//GEN-LAST:event_volverActionPerformed
-
-    private void verDescendenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verDescendenciaActionPerformed
+    private void verAntepasadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verAntepasadosActionPerformed
         String indexStr = inputIndex.getText();
         if (validar.convertirNumero(indexStr) != -1) {
             int index = validar.convertirNumero(indexStr);
             if (validar.indexResultadoValido(resultados, index)) {
-                Arbol arbolDesc = new Arbol();
-                arbolDesc.setRoot(gestionApp.getArbolGenealogico().buscarNombreUnico(gestionApp.buscarIndex(resultados, index).getNombreUnico()));
+                
+                String nombreBuscar = gestionApp.buscarIndex(resultados, index).getNombreUnico();
+                NodoA nodo = gestionApp.getArbolGenealogico().buscarNombreUnico(nombreBuscar);
+                Lista ancestros = gestionApp.getArbolGenealogico().buscarAntepasados(nodo);
+                
+                
                 System.setProperty("org.graphstream.ui", "swing");
-                MostrarArbol verArbol = new MostrarArbol(arbolDesc, this);
+                MostrarLista verArbol = new MostrarLista(ancestros, this);
                 verArbol.setVisible(true);
                 this.dispose();
             } else {
@@ -160,7 +142,7 @@ public class BuscarNombre extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Solo se admiten enteros");
         }
-    }//GEN-LAST:event_verDescendenciaActionPerformed
+    }//GEN-LAST:event_verAntepasadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,20 +161,20 @@ public class BuscarNombre extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuscarNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerAntepasados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuscarNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerAntepasados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuscarNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerAntepasados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuscarNombre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VerAntepasados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuscarNombre().setVisible(true);
+                new VerAntepasados().setVisible(true);
             }
         });
     }
@@ -207,7 +189,7 @@ public class BuscarNombre extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea resultadoBusqueda;
-    private javax.swing.JButton verDescendencia;
+    private javax.swing.JButton verAntepasados;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

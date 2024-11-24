@@ -88,8 +88,14 @@ public class Iniciar extends javax.swing.JFrame {
                 gestionApp.setTablaPersonas(cargarArchivo.getTablaHash());
                 gestionApp.setNombreFamilia(cargarArchivo.getNombreFamilia());
                 
-                gestionApp.getTablaPersonas().mostrarTabla();
+                
                 Menu menu = new Menu();
+                menu.setVisible(false);
+                this.dispose();
+                
+                System.setProperty("org.graphstream.ui", "swing");
+                MostrarArbol verArbol = new MostrarArbol(gestionApp.getArbolGenealogico(), menu);
+                verArbol.setVisible(true);
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null, "Hay errores en el JSON");

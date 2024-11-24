@@ -99,4 +99,42 @@ public class GestionApp {
         
         return resultadosStr;
     }
+    public Lista listaGen(){
+        Lista generaciones = new Lista();
+        int maxGen = this.getArbolGenealogico().maximoNivel();
+        for (int i = 0; i < maxGen; i++) {
+            generaciones.insertarFinal(i+1);
+        }
+        
+        return generaciones;
+    }
+    
+    public Persona[] buscarGeneracion(int numGen){
+        Lista generacion = this.getArbolGenealogico().listaNivel(numGen);
+        if(!generacion.isEmpty()){
+            Persona[] resultadoBusq = new Persona[generacion.getSize()];
+            
+            for (int i = 0; i < generacion.getSize(); i++) {
+                resultadoBusq[i] = (Persona) generacion.getValor(i);
+            }
+            
+            return resultadoBusq;
+        }
+        return null;
+    }
+    
+    public String mostrarGeneracion(Persona[] resultados){
+        String resultadosStr = "";
+        for (int i = 0; i < resultados.length; i++) {
+            int index = i;
+            resultadosStr += "Indice: " + index + "\nNombre Unico: " + resultados[i].getNombreUnico()+"\n\n";
+        }
+        
+        return resultadosStr;
+    }
+    
+    
+    
+    
+    
 }

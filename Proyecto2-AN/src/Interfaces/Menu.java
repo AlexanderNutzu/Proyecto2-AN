@@ -43,11 +43,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         nombreLinaje = new javax.swing.JLabel();
         cargarNuevo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        verArbol = new javax.swing.JButton();
         buscarPorNombre = new javax.swing.JButton();
         buscarPorTitulo = new javax.swing.JButton();
         verGen = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        verAntepasados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,8 +74,13 @@ public class Menu extends javax.swing.JFrame {
         });
         jPanel1.add(cargarNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        jButton2.setText("Ver Arbol");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
+        verArbol.setText("Ver Arbol");
+        verArbol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verArbolActionPerformed(evt);
+            }
+        });
+        jPanel1.add(verArbol, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
 
         buscarPorNombre.setText("Buscar Por Nombre");
         buscarPorNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -94,10 +99,20 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(buscarPorTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, -1, -1));
 
         verGen.setText("Ver Generaciones");
+        verGen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verGenActionPerformed(evt);
+            }
+        });
         jPanel1.add(verGen, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
-        jButton6.setText("Ver Antepasados");
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
+        verAntepasados.setText("Ver Antepasados");
+        verAntepasados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verAntepasadosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(verAntepasados, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,6 +168,23 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buscarPorTituloActionPerformed
 
+    private void verGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verGenActionPerformed
+        VerGeneraciones v3 = new VerGeneraciones();
+        this.dispose();
+    }//GEN-LAST:event_verGenActionPerformed
+
+    private void verAntepasadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verAntepasadosActionPerformed
+        VerAntepasados v4 = new VerAntepasados();
+        this.dispose();
+    }//GEN-LAST:event_verAntepasadosActionPerformed
+
+    private void verArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verArbolActionPerformed
+        System.setProperty("org.graphstream.ui", "swing");
+        MostrarArbol verArbol = new MostrarArbol(gestionApp.getArbolGenealogico(), this);
+        verArbol.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_verArbolActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -192,12 +224,12 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton buscarPorNombre;
     private javax.swing.JButton buscarPorTitulo;
     private javax.swing.JButton cargarNuevo;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombreLinaje;
+    private javax.swing.JButton verAntepasados;
+    private javax.swing.JButton verArbol;
     private javax.swing.JButton verGen;
     // End of variables declaration//GEN-END:variables
 }
